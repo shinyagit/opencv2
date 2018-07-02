@@ -3,7 +3,7 @@ import cv2
 
 def nothing(x):
     pass
-    
+
 cap = cv2.VideoCapture(0)
 # cap.set(cv2.CAP_PROP_FRAME_WIDTH,  400)
 # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 300)
@@ -16,20 +16,21 @@ window_name_color = "color tone"
 trackbar_name_H = "R"
 trackbar_name_S = "G"
 trackbar_name_V = "B"
+window_size = cv2.WINDOW_NORMAL
 
 # gamma correction
-cv2.namedWindow(window_name, cv2.WINDOW_NORMAL) # create win with win name
+cv2.namedWindow(window_name, window_size) # create win with win name
 # gamma track bar
 cv2.createTrackbar(trackbar_name_gamma, window_name, 1, 50, nothing)
 # cv2.setTrackbarPos(trackbar_name_gamma, window_name, 10)
 # gaussian blur
-cv2.namedWindow(window_name_blur, cv2.WINDOW_NORMAL) # create win with win name
+cv2.namedWindow(window_name_blur, window_size) # create win with win name
 # gaussian blur track bar
 cv2.createTrackbar(trackbar_name_gaussian, window_name_blur, 0, 50, nothing)
 # cv2.setTrackbarPos(trackbar_name_gaussian, window_name_blur, 1)
 
 # color tone
-cv2.namedWindow(window_name_color, cv2.WINDOW_NORMAL) # create win with win name
+cv2.namedWindow(window_name_color, window_size) # create win with win name
 # color tone R track bar
 cv2.createTrackbar(trackbar_name_H, window_name_color, 1, 255, nothing)
 # color tone G track bar
@@ -66,7 +67,7 @@ while(True):
     g = cv2.getTrackbarPos(trackbar_name_S, window_name_color)
     b = cv2.getTrackbarPos(trackbar_name_V, window_name_color)
     bgr_img = cv2.split(frame)
-    color_tone_img = cv2.merge((bgr_img[0]*(g/255), bgr_img[0]*(b/255), bgr_img[0]*(r/255)))
+    color_tone_img = cv2.merge((bgr_img[0]*(g/255), bgr_img[1]*(b/255), bgr_img[2]*(r/255)))
     # display gamma in window
     # cv2.putText(gamma_correction_img, "gamma:" + str(gamma), (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,0),2)
 
